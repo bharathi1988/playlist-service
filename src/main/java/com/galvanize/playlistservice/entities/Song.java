@@ -1,7 +1,5 @@
 package com.galvanize.playlistservice.entities;
 
-import com.sun.javafx.beans.IDProperty;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
