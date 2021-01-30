@@ -36,4 +36,17 @@ public class AddSongService {
 
         return playlistRepository.save(playlist);
     }
+
+    public Playlist deleteSongFromPlaylist(Long playlistId, Long songId) {
+
+        Playlist playlist = playlistRepository.findById(playlistId).get();
+        Optional<Song> song = songRepository.findById(songId);
+        if(song.isPresent()){
+            List<Song> songList = playlist.getSongs();
+            songList.removeIf(song1 -> song1.getSongId().equals(songId));
+            playlist.setSongs(songList);
+        }
+        return playlistRepository.save(playlist);
+    }
+
 }

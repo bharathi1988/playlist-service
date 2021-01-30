@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -82,4 +83,18 @@ public class AddSongsIntegrationTests {
         )       .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.error").value("Song not found"));
     }
+
+    @Test
+    @Order(4)
+    public void deleteSongFromPlaylist() throws Exception{
+
+        mockMvc.perform(delete("/api/v1/playlist/1/1")
+                .contentType(MediaType.APPLICATION_JSON)
+        )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").exists())
+               // .andExpect(jsonPath("$.playlistName").value("1950 Hits"))
+                .andExpect(jsonPath("$.songs.length()").value(1));
+    }
+
 }

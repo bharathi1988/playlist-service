@@ -39,3 +39,13 @@ Then the playlist has 1 song
 |---|--------------|------|-----------|
 |api/v1/playlist/{playlist_id}/{song_id} |PATCH|201 Created|Returns the Entire Playlist with the Songs|
 
+
+````
+Given a playlist with 2 songs
+When a song is removed
+Then the playlist has 1 song.
+````
+### API Specification
+|URL|Request Method|Status|Description|
+|---|--------------|------|-----------|
+|api/v1/playlist/{playlist_id}/{song_id} |PATCH|200 deleted|Returns the updated Playlist with the one song|
