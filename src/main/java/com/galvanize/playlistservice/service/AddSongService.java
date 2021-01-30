@@ -31,6 +31,6 @@ public class AddSongService {
             playlist.setSongs(songList);
         }
 
-        return playlist;
+        return playlistRepository.save(playlist);
     }
 }
