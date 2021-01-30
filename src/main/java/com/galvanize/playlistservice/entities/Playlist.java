@@ -10,6 +10,8 @@ public class Playlist {
     @GeneratedValue
     private Long id;
     private String playlistName;
+    @ElementCollection
+    private List<Song> songs;
 
     public Playlist() {
     }
@@ -41,10 +43,6 @@ public class Playlist {
     public void setSongs(List<Song> songs) {
         this.songs = songs;
     }
-
-    @ElementCollection
-    private List<Song> songs;
-
 
 
 }
