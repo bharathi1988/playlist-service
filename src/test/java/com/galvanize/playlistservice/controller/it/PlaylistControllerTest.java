@@ -44,15 +44,11 @@ public class PlaylistControllerTest {
     void createPlayList_whenReturnsErrorMsg400() throws Exception {
         Playlist pl1 = new Playlist("");
 
-        ResponseStatusException actual = (ResponseStatusException) mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/playlist")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/playlist")
                                .contentType(MediaType.APPLICATION_JSON)
                                .content(mapper.writeValueAsString(pl1)))
                                .andExpect(status().isBadRequest())
-                               .andExpect(result -> assertThat(result.getResolvedException() instanceof ResponseStatusException))
-                               .andReturn().getResolvedException();
-
-        assertEquals("PlaylistName Required",actual.getReason());
-
+                               .andExpect(jsonPath("$.error").value("Playlist Name is Required"));
     }
 
 
