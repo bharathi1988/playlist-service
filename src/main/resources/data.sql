@@ -7,5 +7,3 @@ INSERT INTO song
 (4, 'The Purple People Eater');
 
 
-INSERT into playlist(id, playlist_name)
-values(1, '1950 Hits');
