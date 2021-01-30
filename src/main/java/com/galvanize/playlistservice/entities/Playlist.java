@@ -1,6 +1,7 @@
 package com.galvanize.playlistservice.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,7 +12,7 @@ public class Playlist {
     private Long id;
     private String playlistName;
     @ElementCollection
-    private List<Song> songs;
+    private List<Song> songs = new ArrayList<>();
 
     public Playlist() {
     }
@@ -43,6 +44,5 @@ public class Playlist {
     public void setSongs(List<Song> songs) {
         this.songs = songs;
     }
-
 
 }
