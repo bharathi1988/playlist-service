@@ -48,4 +48,4 @@ Then the playlist has 1 song.
 ### API Specification
 |URL|Request Method|Status|Description|
 |---|--------------|------|-----------|
-|api/v1/playlist/{playlist_id}/{song_id} |PATCH|200 deleted|Returns the updated Playlist with the one song|
+|api/v1/playlist/{playlist_id}/{song_id} |DELETE|200 deleted|Returns the updated Playlist with the one song|
