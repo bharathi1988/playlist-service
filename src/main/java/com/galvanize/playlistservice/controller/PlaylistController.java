@@ -1,6 +1,7 @@
 package com.galvanize.playlistservice.controller;
 
 import com.galvanize.playlistservice.entities.Playlist;
+import com.galvanize.playlistservice.exception.GenericNotFoundException;
 import com.galvanize.playlistservice.service.PlaylistService;
 import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
@@ -23,14 +24,12 @@ public class PlaylistController {
 
     @PostMapping("/api/v1/playlist")
     @ResponseStatus(HttpStatus.CREATED)
-    public Playlist createPlaylist(@RequestBody Playlist playlist){
-
+    public Playlist createPlaylist(@RequestBody Playlist playlist) throws GenericNotFoundException {
         if(StringUtils.hasText(playlist.getPlaylistName())){
             return playlistService.createPlaylist(playlist);
         }else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"PlaylistName Required");
+            throw new GenericNotFoundException("Playlist Name is Required");
         }
-
     }
 
 

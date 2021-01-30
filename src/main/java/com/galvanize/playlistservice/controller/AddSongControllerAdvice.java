@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class AddSongControllerAdvice {
+public class
+AddSongControllerAdvice {
 
     @ExceptionHandler(GenericNotFoundException.class)
     public ResponseEntity<Object> handleNotFound(GenericNotFoundException genericNotFoundException) throws Exception {
@@ -18,8 +19,8 @@ public class AddSongControllerAdvice {
     private String buildResponseEntity(String message) throws Exception {
         //forming json to return in the response;
         ObjectMapper mapper = new ObjectMapper();
-        ObjectNode incorrectSong = mapper.createObjectNode();
-        incorrectSong.put("error", message);
-        return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(incorrectSong);
+        ObjectNode errorNode = mapper.createObjectNode();
+        errorNode.put("error", message);
+        return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(errorNode);
     }
 }
