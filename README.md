@@ -1,3 +1,5 @@
+https://heroku-playlist.herokuapp.com/swagger-ui.html
+
 ## Playlist Service
 - - - - - - 
 
