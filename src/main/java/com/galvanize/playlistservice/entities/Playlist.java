@@ -14,6 +14,13 @@ public class Playlist {
     @ElementCollection
     private List<Song> songs = new ArrayList<>();
 
+    public Playlist() {
+    }
+
+    public Playlist(String playlistName) {
+        this.playlistName = playlistName;
+    }
+
     public Long getId() {
         return id;
     }
@@ -37,4 +44,5 @@ public class Playlist {
     public void setSongs(List<Song> songs) {
         this.songs = songs;
     }
+
 }
