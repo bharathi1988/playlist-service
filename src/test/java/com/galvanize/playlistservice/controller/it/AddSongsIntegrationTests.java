@@ -1,8 +1,10 @@
 package com.galvanize.playlistservice.controller.it;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.galvanize.playlistservice.controller.AddSongController;
 import com.galvanize.playlistservice.entities.Playlist;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -19,6 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class AddSongsIntegrationTests {
 
     @Autowired
@@ -27,8 +30,8 @@ public class AddSongsIntegrationTests {
     @Autowired
     private ObjectMapper mapper;
 
-    @Test
-    public void addSongsToEmptyPlaylistTest() throws Exception{
+    @BeforeEach
+    public void init() throws Exception {
         Playlist pl1 = new Playlist("1950 Hits");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/playlist")
@@ -39,6 +42,12 @@ public class AddSongsIntegrationTests {
                 .andExpect(jsonPath("$.playlistName").value("1950 Hits"))
                 .andExpect(jsonPath("$.songs").isEmpty());
 
+    }
+
+    @Test
+    @Order(1)
+    public void addSongsToEmptyPlaylistTest() throws Exception{
+
         mockMvc.perform(patch("/api/v1/playlist/1/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         )
@@ -47,4 +56,20 @@ public class AddSongsIntegrationTests {
                 .andExpect(jsonPath("$.playlistName").value("1950 Hits"))
                 .andExpect(jsonPath("$.songs.[0].songId").value(1));
     }
+
+
+    @Test
+    @Order(2)
+    public void addSongsToANotEmptyPlaylist() throws Exception{
+
+
+        mockMvc.perform(patch("/api/v1/playlist/1/2")
+                .contentType(MediaType.APPLICATION_JSON)
+        )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").exists())
+                .andExpect(jsonPath("$.playlistName").value("1950 Hits"))
+                .andExpect(jsonPath("$.songs.length()").value(2));
+    }
+
 }
