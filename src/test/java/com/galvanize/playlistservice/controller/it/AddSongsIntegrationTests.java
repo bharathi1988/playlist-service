@@ -72,4 +72,14 @@ public class AddSongsIntegrationTests {
                 .andExpect(jsonPath("$.songs.length()").value(2));
     }
 
+    @Test
+    @Order(3)
+    public void addSongsToANotEmptyPlaylist_songDoesNotExist() throws Exception{
+
+
+        mockMvc.perform(patch("/api/v1/playlist/1/5")
+                .contentType(MediaType.APPLICATION_JSON)
+        )       .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.error").value("Song not found"));
+    }
 }
