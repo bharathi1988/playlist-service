@@ -24,7 +24,7 @@ Then a message is returned that a name is required.
 ### API Specification
 |URL|Request Method|Status|Description|
 |---|--------------|------|-----------|
-|/api/v1/playlist |POST|400 Bad Request|Returns the Error Message Playlisname is required |
+|/api/v1/playlist |POST|400 Bad Request|Returns the Error Message PlaylistName Required |
 
 
 
