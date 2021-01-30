@@ -11,7 +11,7 @@ public class Playlist {
     @GeneratedValue
     private Long id;
     private String playlistName;
-    @ElementCollection
+    @ManyToMany
     private List<Song> songs = new ArrayList<>();
 
     public Playlist() {
